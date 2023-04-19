@@ -7,6 +7,9 @@ class CounterProvider with ChangeNotifier {
 
   void removeCounter() {
     _count--;
+    if (_count < 0) {
+      _count = 0;
+    }
     notifyListeners();
   }
 

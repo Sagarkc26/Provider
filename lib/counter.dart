@@ -1,3 +1,4 @@
+import 'package:buttomnavigationbar/parts/favourite_screen.dart';
 import 'package:buttomnavigationbar/provider/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ class _CounterPageState extends State<CounterPage> {
   Widget build(BuildContext context) {
     final counterprovider =
         Provider.of<CounterProvider>(context, listen: false);
+    print("objects");
 
     return Scaffold(
         body: SafeArea(
@@ -58,17 +60,29 @@ class _CounterPageState extends State<CounterPage> {
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       color: Colors.black.withOpacity(value.currentvalue),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                   ],
                 );
               },
-            )
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const FavouriteScreen();
+                  }));
+                },
+                child: const Text("Goto"))
           ],
         )),
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton.extended(
+                heroTag: "f1",
                 onPressed: () {
                   counterprovider.removeCounter();
                 },
@@ -77,6 +91,7 @@ class _CounterPageState extends State<CounterPage> {
               width: 4,
             ),
             FloatingActionButton.extended(
+                heroTag: "f2",
                 onPressed: () {
                   counterprovider.resetCounter();
                 },
@@ -85,6 +100,7 @@ class _CounterPageState extends State<CounterPage> {
               width: 4,
             ),
             FloatingActionButton.extended(
+                heroTag: "f3",
                 onPressed: () {
                   counterprovider.addCounter();
                 },
